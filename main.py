@@ -1,15 +1,14 @@
 """
 Event Agent entry point
 """
+import uvicorn
+from fastapi import FastAPI
 
+from routers import status
 
-def main() -> None:
-    """
-    Main
-    :return:
-    """
-    print("Starting Event Agent")
+app = FastAPI()
+app.include_router(status.router)
 
 
 if __name__ == "__main__":
-    main()
+    uvicorn.run(app, host="0.0.0.0", port=8000)
