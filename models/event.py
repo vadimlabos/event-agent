@@ -4,4 +4,4 @@ from pydantic import BaseModel
 
 
 class Event(BaseModel):
-    session: Optional[list[dict[str,int]]] = None
+    session: Optional[list[dict[str, int]]] = None

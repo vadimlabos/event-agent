@@ -1,12 +1,13 @@
-from fastapi import routing
+from fastapi import APIRouter
 
 from models.event import Event
 from controllers.event import Controller
 
-event = routing.APIRouter()
+router: APIRouter = APIRouter()
+
+controller: Controller = Controller()
 
 
-@event.post("/event")
-def add(event: Event) -> None:
-    controller: Controller = Controller()
-    return controller.handle(event)
+@router.post("/event")
+async def add(event: Event) -> int:
+    return await controller.handle(event)
