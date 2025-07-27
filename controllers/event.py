@@ -12,7 +12,13 @@ class Controller:
         counter: int = 0
         for session in event.session:
             for _, value in session.items():
-                tasks.append(self.__client.post(f"http://localhost:8084/session/{value}/action/clean_term"))
+                tasks.append(self.__client.post(
+                    headers={
+                        "X-Laas-Username": "labos",
+                        "X-Laas-Password": "labos",
+                        "X-Laas-Application": "7012"
+                    },
+                    url=f"http://localhost:8084/session/{value}/action/clean_term"))
 
         responses = await asyncio.gather(*tasks, return_exceptions=True)
         counter = 0
